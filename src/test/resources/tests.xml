@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="all" parallel="methods" thread-count="2">
+    <test name="tests">
+        <classes>
+            <class name="MorgagePaymentCalculatorPageTests">
+            <methods>
+                <include name="canCalculatePayment" />
+                <include name="canMoveSliders"/>
+            </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
