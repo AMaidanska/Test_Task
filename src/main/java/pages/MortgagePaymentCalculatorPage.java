@@ -2,12 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utils.DriverHolder;
 
-public class MortgagePaymentCalculatorPage extends BasePage{
+public class MortgagePaymentCalculatorPage extends BasePage {
     private By purchasePrisePlusBtn = By.id("PrixProprietePlus");
     private By downPaymentPlusBtn = By.id("MiseDeFondPlus");
     private By amortizationDropDown = By.xpath("//*[contains(text(),'Amortization')]/following-sibling::div");
@@ -42,31 +41,31 @@ public class MortgagePaymentCalculatorPage extends BasePage{
         }
     }
 
-    public void selectArmotization(int index){
-       WebElement dropDown =  DriverHolder.getDriver().findElement(amortizationDropDown);
+    public void selectArmotization(int index) {
+        WebElement dropDown = DriverHolder.getDriver().findElement(amortizationDropDown);
         dropDown.click();
         dropDown.findElement(By.cssSelector(String.format("[data-index='%d']", index))).click();
     }
 
-    public void selectPaymentFrequency(int index){
-        WebElement dropDown =  DriverHolder.getDriver().findElement(paymentFreequencyDropDown);
+    public void selectPaymentFrequency(int index) {
+        WebElement dropDown = DriverHolder.getDriver().findElement(paymentFreequencyDropDown);
         dropDown.click();
         dropDown.findElement(By.cssSelector(String.format("[data-index='%d']", index))).click();
     }
 
-    public void setInterestRate(double interestRate){
+    public void setInterestRate(double interestRate) {
         WebElement interestInput = DriverHolder.getDriver().findElement(interestRateInput);
         interestInput.clear();
         interestInput.sendKeys(String.valueOf(interestRate));
     }
 
-    public double getPaymentsValue(){
+    public double getPaymentsValue() {
         String text = findExplicitly(paymentsValue).getText();
         Double price = Double.valueOf(text.substring(2, text.length()));
         return price;
     }
 
-    public void movePurchasePriceSlider(){
+    public void movePurchasePriceSlider() {
         WebElement sliderPointer = DriverHolder.getDriver().findElement(purchasePriceSliderPointer);
         WebElement slider = DriverHolder.getDriver().findElement(purchasePriceSlider);
         Dimension sliderSize = slider.getSize();
@@ -76,19 +75,29 @@ public class MortgagePaymentCalculatorPage extends BasePage{
         Actions builder = new Actions(DriverHolder.getDriver());
         builder.moveToElement(sliderPointer)
                 .click()
-                .dragAndDropBy(sliderPointer,xCoord + sliderWidth, 0)
+                .dragAndDropBy(sliderPointer, xCoord + sliderWidth, 0)
                 .build()
                 .perform();
     }
 
-    public String getPurchasepriseSliderStyle(){
-        return  DriverHolder.getDriver().findElement(purchasePriceSliderPointer).getAttribute("style");
+    public String getPurchasepriseSliderStyle() {
+        return DriverHolder.getDriver().findElement(purchasePriceSliderPointer).getAttribute("style");
     }
 
-    public void calculate(){
+    public void calculatePayments(int purchasePrice, int downPayment, int amortizationIndex,
+                                  int paymentFrequencyIndex, double interest) {
+        addPurchasePrice(purchasePrice);
+        addDownPayment(downPayment);
+        selectArmotization(amortizationIndex);
+        selectPaymentFrequency(paymentFrequencyIndex);
+        setInterestRate(interest);
+        calculate();
+    }
+
+    public void calculate() {
         findExplicitly(calculateBtn).click();
     }
-    }
+}
 
 
 

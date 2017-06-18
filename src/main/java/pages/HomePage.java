@@ -1,15 +1,11 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 import utils.DriverHolder;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
+    private static final String HOME_URL = "https://ia.ca";
 
-    public HomePage(final String url) {
-        DriverHolder.getDriver().get(url);
+    public HomePage() {
+        DriverHolder.getDriver().get(HOME_URL);
     }
-
-
 }

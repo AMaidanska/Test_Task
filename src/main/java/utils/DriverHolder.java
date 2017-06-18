@@ -5,25 +5,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DriverHolder {
 
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>()
-    {
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>() {
         @Override
-        protected WebDriver initialValue()
-        {
+        protected WebDriver initialValue() {
             final String driverPath = "src/main/resources/chromedriver";
             System.setProperty("webdriver.chrome.driver", driverPath);
-            return new ChromeDriver();
+            WebDriver driver = new ChromeDriver();
+            driver.manage().window().maximize();
+            return driver;
 
         }
     };
 
-    public static WebDriver getDriver()
-    {
+    public static WebDriver getDriver() {
         return driver.get();
     }
 
-    public static void removeDriver()
-    {
+    public static void removeDriver() {
         driver.get().quit();
         driver.remove();
     }
