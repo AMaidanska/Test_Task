@@ -61,8 +61,7 @@ public class MortgagePaymentCalculatorPage extends BasePage {
 
     public double getPaymentsValue() {
         String text = findExplicitly(paymentsValue).getText();
-        Double price = Double.valueOf(text.substring(2, text.length()));
-        return price;
+        return Double.valueOf(text.substring(2, text.length()));
     }
 
     public void movePurchasePriceSlider() {
