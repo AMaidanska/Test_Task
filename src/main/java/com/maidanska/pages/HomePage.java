@@ -1,6 +1,6 @@
-package pages;
+package com.maidanska.pages;
 
-import utils.DriverHolder;
+import com.maidanska.utils.DriverHolder;
 
 public class HomePage extends BasePage {
     private static final String HOME_URL = "https://ia.ca";

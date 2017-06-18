@@ -2,11 +2,11 @@
 <suite name="all" parallel="methods" thread-count="2">
     <test name="tests">
         <classes>
-            <class name="MorgagePaymentCalculatorPageTests">
-            <methods>
-                <include name="canCalculatePayment" />
-                <include name="canMoveSliders"/>
-            </methods>
+            <class name="com.maidanska.tests.MortgagePaymentCalculatorPageTests">
+                <methods>
+                    <include name="canCalculatePayment"/>
+                    <include name="canMoveSliders"/>
+                </methods>
             </class>
         </classes>
     </test>
